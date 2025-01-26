@@ -1,29 +1,43 @@
 # memegen
 
-A POSIX shell script to generate memes from the commandline using ImageMagick
+A command-line meme generator written in Rust using ImageMagick
 
 ## Requirements
 
 - ImageMagick installed
-- Impact font installed properly. Check: `convert -list font | grep Impact`
+- DejaVu Sans Bold font installed. Check: `magick -list font | grep "DejaVu-Sans-Bold"`
+
+## Installation
+
+### Cargo
+
+The installed binary will be available in ``~/.cargo/bin``
+
+```sh
+cargo install --git https://github.com/vendicated/memegen
+```
 
 ## Usage
 
 ```
-memegen <INPUT_FILE> <OUTPUT_FILE> [TOP_CAPTION] [BOTTOM_CAPTION]
+memegen <INPUT> <OUTPUT> [OPTIONS]
 
-  - INPUT_FILE: Full or absolute path to a local file. Or alternatively an image url (will be downloaded to /tmp/memetemp using curl)
-  - OUTPUT_FILE: Full or absolute path to save file to. Will not override if file exists
-  - TOP_CAPTION: Top caption. Only one of TOP_CAPTION and BOTTOM_CAPTION is required
-  - BOTTOM_CAPTION: Bottom caption
+Arguments:
+  <INPUT>   Path to local image file or URL
+  <OUTPUT>  Path to save the generated meme
+
+Options:
+  --top-text <TEXT>     Top caption text
+  --bottom-text <TEXT>  Bottom caption text
+  -h, --help            Print help
 ```
 
 ## Example
 
 ```sh
-$ memegen https://i.imgur.com/Yu6kZc5.jpg 5g.jpg "5g users be like" "omg my phone so fast nya~"
+$ memegen https://i.imgur.com/Yu6kZc5.jpg 5g.jpg --top-text "5g users be like" --bottom-text "omg my phone so fast nya~"
 Done! Saved to 5g.jpg
 ```
 
 Results in:
-![Example Image](example.png)
+![Example Image](.github/example.png)
